@@ -19,9 +19,9 @@ mouse = Controller()
 def clicker():
     while True:
         if enabled:
-            # print(mouse.position)
+            print(mouse.position)
             # print("CLICKING")
-            mouse.click(Button.left, 1)
+            # mouse.click(Button.left, 1)
             if enabled_multi:
                 # print("MULTI_LOCATIONS")
                 global locations
@@ -45,10 +45,14 @@ def toggle_event(key):
 def read_config():
     with open(os.path.join(os.path.dirname(__file__), "config.json"), "r") as config_file:
         data = json.load(config_file)
+        computername = os.environ.get("COMPUTERNAME")
+        print(computername)
         global repetition
-        repetition = data["repetition"]
+        repetition = float(data["repetition"][computername])
+        print(repetition)        
         global locations
-        locations = data["locations"]
+        locations = data["locations"][computername]
+        print(locations)
         
 
 def main():
