@@ -2,7 +2,7 @@
     "repetition":
     {
         "AMD-RYZEN-2600X" : "0.001",
-        "INTEL-I7-4500U" : "0.1"
+        "INTEL-I7-4500U" : "0.05"
     },
     "locations": 
     {
