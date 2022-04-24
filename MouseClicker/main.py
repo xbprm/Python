@@ -7,30 +7,29 @@ import json
 
 TOGGLE_KEY = KeyCode(char="m")
 
-clicking = False
-invert = False
+enabled = False
+locations = []
+position = 0
 repetition = 0.01
 mouse = Controller()
 
 
 def clicker():
     while True:
-        if clicking:
-            # mouse.click(Button.left, 1)
-            global invert
-            if invert:
-                mouse.position = (1206, 690)
-            else:
-                mouse.position = (1206, 440)
-            invert = not invert
+        if enabled:
+            global locations
+            global position            
+            mouse.position = locations[position]
+            mouse.click(Button.left, 1)
+            position = (position + 1) % len(locations)
         global repetition
         time.sleep(repetition)
 
 
 def toggle_event(key):
     if key == TOGGLE_KEY:
-        global clicking
-        clicking = not clicking
+        global enabled
+        enabled = not enabled
         invert = False
 
 
@@ -39,7 +38,9 @@ def read_config():
         data = json.load(config_file)
         global repetition
         repetition = data["repetition"]
-
+        global locations
+        locations = data["locations"]
+        
 
 def main():
     read_config()
