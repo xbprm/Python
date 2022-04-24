@@ -5,9 +5,11 @@ from pynput.mouse import Controller, Button
 from pynput.keyboard import Listener, KeyCode
 import json
 
-TOGGLE_KEY = KeyCode(char="m")
+TOGGLE_KEY = KeyCode(char="t")
+TOGGLE_KEY_MULTI = KeyCode(char="m")
 
 enabled = False
+enabled_multi = False
 locations = []
 position = 0
 repetition = 0.01
@@ -17,20 +19,26 @@ mouse = Controller()
 def clicker():
     while True:
         if enabled:
-            global locations
-            global position            
-            mouse.position = locations[position]
+            # print("CLICKING")
             mouse.click(Button.left, 1)
-            position = (position + 1) % len(locations)
+            if enabled_multi:
+                # print("MULTI_LOCATIONS")
+                global locations
+                global position            
+                mouse.position = locations[position]            
+                position = (position + 1) % len(locations)
         global repetition
         time.sleep(repetition)
 
 
 def toggle_event(key):
+    global enabled
     if key == TOGGLE_KEY:
-        global enabled
         enabled = not enabled
-        invert = False
+    if key == TOGGLE_KEY_MULTI:
+        enabled = not enabled
+        global enabled_multi
+        enabled_multi = not enabled_multi
 
 
 def read_config():
