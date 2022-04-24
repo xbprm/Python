@@ -5,7 +5,7 @@ from pynput.mouse import Controller, Button
 from pynput.keyboard import Listener, KeyCode
 import json
 
-TOGGLE_KEY = KeyCode(char="t")
+TOGGLE_KEY = KeyCode(char="m")
 
 clicking = False
 invert = False
