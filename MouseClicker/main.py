@@ -19,6 +19,7 @@ mouse = Controller()
 def clicker():
     while True:
         if enabled:
+            # print(mouse.position)
             # print("CLICKING")
             mouse.click(Button.left, 1)
             if enabled_multi:
