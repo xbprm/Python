@@ -11,7 +11,9 @@ TOGGLE_KEY_MULTI = KeyCode(char="m")
 enabled = False
 enabled_multi = False
 locations = []
-position = 0
+location_names = []
+location = 0
+location_name = []
 repetition = 0.01
 mouse = Controller()
 
@@ -19,15 +21,16 @@ mouse = Controller()
 def clicker():
     while True:
         if enabled:
-            # print(mouse.position)
-            # print("CLICKING")
             mouse.click(Button.left, 1)
             if enabled_multi:
-                # print("MULTI_LOCATIONS")
                 global locations
-                global position            
-                mouse.position = locations[position]            
-                position = (position + 1) % len(locations)
+                global location_names
+                global location     
+                global location_name
+               
+                location = (location + 1) % len(location_names)
+                location_name = location_names[location]
+                mouse.position = (locations[location_name]["x"], locations[location_name]["y"])
         global repetition
         time.sleep(repetition)
 
@@ -46,13 +49,12 @@ def read_config():
     with open(os.path.join(os.path.dirname(__file__), "config.json"), "r") as config_file:
         data = json.load(config_file)
         computername = os.environ.get("COMPUTERNAME")
-        # print(computername)
         global repetition
         repetition = float(data["repetition"][computername])
-        # print(repetition)        
         global locations
         locations = data["locations"][computername]
-        # print(locations)
+        global location_names
+        location_names = data["location_names"][computername]
         
 
 def main():
