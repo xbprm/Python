@@ -50,11 +50,11 @@ def read_config():
         data = json.load(config_file)
         computername = os.environ.get("COMPUTERNAME")
         global repetition
-        repetition = float(data["repetition"][computername])
+        repetition = float(data[computername]["repetition"])
         global locations
-        locations = data["locations"][computername]
+        locations = data[computername]["locations"]
         global location_names
-        location_names = data["location_names"][computername]
+        location_names = data[computername]["location_names"]
         
 
 def main():
