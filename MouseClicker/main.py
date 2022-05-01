@@ -1,4 +1,5 @@
 import os
+from random import randint
 import time
 import threading
 from pynput.mouse import Controller, Button
@@ -30,7 +31,7 @@ def clicker():
                
                 location = (location + 1) % len(location_names)
                 location_name = location_names[location]
-                mouse.position = (locations[location_name]["x"], locations[location_name]["y"])
+                mouse.position = (locations[location_name]["x"] + randint(-10, 10), locations[location_name]["y"] + randint(-10, 10))
         global repetition
         time.sleep(repetition)
 
