@@ -1,22 +1,24 @@
 {
     "AMD-RYZEN-2600X":
     {
-        "repetition": "0.001",
+        "repetition": "0.01",
         "locations": 
         {
-            "Webcam"    : {"x": 1200, "y": 1020},
-            "BDSM Show" : {"x": 1206, "y":  690}, 
-            "Bad Girls" : {"x": 1206, "y":  440},
-            "Strip Club": {"x": 1910, "y":  960}, 
-            "Night Club": {"x": 1760, "y":  660}
+            "Webcam"    : {"x":  980, "y": 1040},
+            "BDSM Show" : {"x":  800, "y":  750}, 
+            "Bad Girls" : {"x": 1200, "y":  440},
+            "Strip Club": {"x": 2070, "y":  960}, 
+            "Night Club": {"x": 1770, "y":  670},
+            "Strip Show": {"x": 2000, "y":  390}
         },
         "location_names": 
         [
-            "Webcam",
+            "Webcam", 
             "BDSM Show", 
             "Bad Girls", 
             "Strip Club", 
-            "Night Club"
+            "Night Club",
+            "Strip Show"
         ]
     },
     "INTEL-I7-4500U": 
@@ -28,7 +30,8 @@
             "BDSM Show" : {"x":  760, "y":  420}, 
             "Bad Girls" : {"x":  760, "y":  280},
             "Strip Club": {"x": 1130, "y":  570}, 
-            "Night Club": {"x": 1070, "y":  400}
+            "Night Club": {"x": 1070, "y":  400},
+            "Strip Show": {"x": 1070, "y":  400}
         },
         "location_names": 
         [
@@ -36,7 +39,8 @@
             "BDSM Show", 
             "Bad Girls", 
             "Strip Club", 
-            "Night Club"
+            "Night Club",
+            "Strip Show"
         ]
     }
 }

@@ -22,6 +22,7 @@ mouse = Controller()
 def clicker():
     while True:
         if enabled:
+            # print(mouse.position)
             mouse.click(Button.left, 1)
             if enabled_multi:
                 global locations
@@ -30,9 +31,9 @@ def clicker():
                 global location_name
                
                 location = (location + 1) % len(location_names)
-                location_name = location_names[location]
+                location_name = location_names[location]                
                 mouse.position = (locations[location_name]["x"] + randint(-10, 10), locations[location_name]["y"] + randint(-10, 10))
-        global repetition
+        global repetitionm
         time.sleep(repetition)
 
 
