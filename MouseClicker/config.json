@@ -26,12 +26,12 @@
         "repetition": "0.1",
         "locations": 
         {
-            "Webcam"    : {"x":  760, "y":  590},
-            "BDSM Show" : {"x":  760, "y":  420}, 
+            "Webcam"    : {"x":  640, "y":  600},
+            "BDSM Show" : {"x":  550, "y":  450}, 
             "Bad Girls" : {"x":  760, "y":  280},
-            "Strip Club": {"x": 1130, "y":  570}, 
+            "Strip Club": {"x": 1220, "y":  555}, 
             "Night Club": {"x": 1070, "y":  400},
-            "Strip Show": {"x": 1070, "y":  400}
+            "Strip Show": {"x": 1170, "y":  240}
         },
         "location_names": 
         [
