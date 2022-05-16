@@ -7,19 +7,22 @@
             "Webcam"    : {"x":  980, "y": 1040},
             "BDSM Show" : {"x":  800, "y":  750}, 
             "Bad Girls" : {"x": 1200, "y":  440},
-            "Strip Club": {"x": 1913, "y":  965}, 
+            "Strip Club": {"x": 1913, "y":  965},
             "Night Club": {"x": 1770, "y":  670},
-            "Strip Show": {"x": 2000, "y":  390}
+            "Strip Show": {"x": 2250, "y":  380}
         },
         "location_names": 
         [
-            "Webcam", 
             "BDSM Show", 
-            "Bad Girls", 
             "Strip Club", 
             "Night Club",
             "Strip Show"
-        ]
+        ],
+        "offset": 
+        { 
+            "x": -300,
+            "y": 0
+        }
     },
     "INTEL-I7-4500U": 
     {
@@ -41,6 +44,11 @@
             "Strip Club", 
             "Night Club",
             "Strip Show"
-        ]
+        ],
+        "offset": 
+        { 
+            "x": -0,
+            "y": 0
+        }
     }
 }

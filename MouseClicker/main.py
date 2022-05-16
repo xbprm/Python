@@ -17,6 +17,7 @@ location = 0
 location_name = []
 repetition = 0.01
 mouse = Controller()
+offset = []
 
 
 def clicker():
@@ -32,8 +33,9 @@ def clicker():
                
                 location = (location + 1) % len(location_names)
                 location_name = location_names[location]                
-                mouse.position = (locations[location_name]["x"], locations[location_name]["y"])
-                mouse.scroll(0, 1)
+                mouse.position = (locations[location_name]["x"] + offset["x"], locations[location_name]["y"] + offset["y"])
+                if (0 == offset["x"]):
+                    mouse.scroll(0, 1)
         global repetitionm
         time.sleep(repetition)
 
@@ -58,6 +60,8 @@ def read_config():
         locations = data[computername]["locations"]
         global location_names
         location_names = data[computername]["location_names"]
+        global offset
+        offset = data[computername]["offset"]
         
 
 def main():
