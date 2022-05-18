@@ -32,9 +32,9 @@
             "Webcam"    : {"x":  640, "y":  600},
             "BDSM Show" : {"x":  550, "y":  450}, 
             "Bad Girls" : {"x":  760, "y":  280},
-            "Strip Club": {"x": 1220, "y":  555}, 
+            "Strip Club": {"x": 1131, "y":  570}, 
             "Night Club": {"x": 1070, "y":  400},
-            "Strip Show": {"x": 1170, "y":  240}
+            "Strip Show": {"x": 1320, "y":  240}
         },
         "location_names": 
         [
@@ -47,7 +47,7 @@
         ],
         "offset": 
         { 
-            "x": -0,
+            "x": -160,
             "y": 0
         }
     }
