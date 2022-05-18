@@ -42,12 +42,17 @@ def clicker():
 
 def toggle_event(key):
     global enabled
-    if key == TOGGLE_KEY:
+    if key == TOGGLE_KEY:        
         enabled = not enabled
-    if key == TOGGLE_KEY_MULTI:
+        if enabled:
+            read_config()
+
+    if key == TOGGLE_KEY_MULTI:       
         enabled = not enabled
         global enabled_multi
         enabled_multi = not enabled_multi
+        if enabled_multi:
+            read_config()
 
 
 def read_config():
@@ -65,8 +70,6 @@ def read_config():
         
 
 def main():
-    read_config()
-
     click_thread = threading.Thread(target=clicker)
     click_thread.start()
 
