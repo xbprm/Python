@@ -10,7 +10,11 @@ def display_usage(cpu_usage, memory_usage, bars=50):
     
     print(f"\rCPU Usage: |{cpu_bar}| {cpu_usage:.2f}%  ", end="")
     print(f"MEMORY Usage: |{memory_bar}| {memory_usage:.2f}%  ", end="\r")
-    
-while True:
-    display_usage(psutil.cpu_percent(), psutil.virtual_memory().percent, 30)
-    time.sleep(0.5)
+
+def main():    
+    while True:
+        display_usage(psutil.cpu_percent(), psutil.virtual_memory().percent, 30)
+        time.sleep(0.5)
+
+if __name__ == "__main__":
+    main()
