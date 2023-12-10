@@ -50,7 +50,7 @@ This function generates an image of the Mandelbrot set for a given range of comp
 :param max_iter: The maximum number of iterations to use when calculating the Mandelbrot set.
 """
 def mandelbrot_image(x_min, x_max, y_min, y_max, width, height, max_iter):
-    plt.imshow(mandelbrot_set(x_min, x_max, y_min, y_max, width, height, max_iter), extent=[x_min, x_max, y_min, y_max], cmap='hot')
+    plt.imshow(mandelbrot_set(x_min, x_max, y_min, y_max, width, height, max_iter), extent=None, cmap='hot')
     plt.colorbar()
     plt.title('Mandelbrot Set')
     plt.xlabel('Re(c)')
