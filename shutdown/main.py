@@ -11,6 +11,10 @@ def shutdown_after_duration():
     except ValueError:
         result_label.config(text="Invalid input. Please enter a valid number.")
 
+def abort_shutdown():
+    print("Aborting shutdown...")
+    os.system("shutdown /a")  # Abort the computer shutdown
+
 # Create the main window
 root = tk.Tk()
 root.title("Shutdown After Duration")
@@ -24,6 +28,10 @@ entry.pack()
 # Create and pack the button to trigger the shutdown
 shutdown_button = tk.Button(root, text="Shutdown", command=shutdown_after_duration)
 shutdown_button.pack()
+
+# Create and pack the button to abort the shutdown
+abort_button = tk.Button(root, text="Abort Shutdown", command=abort_shutdown)
+abort_button.pack()
 
 # Create and pack the label for displaying error messages
 result_label = tk.Label(root, text="")
