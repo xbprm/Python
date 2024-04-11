@@ -54,8 +54,44 @@ entry = tk.Entry(root)
 entry.pack()
 entry.focus_set()  # Set focus to the input field
 
+# Function to update the input field with the clicked number
+def update_input(number):
+    current_value = entry.get()
+    entry.delete(0, 'end')
+    entry.insert(0, current_value + str(number))
+
+# Create and pack the numerical keypad
+keypad_frame = tk.Frame(root)
+keypad_frame.pack()
+
+# Add buttons for numbers 0-9
+for i in range(1, 10):
+    button = tk.Button(keypad_frame, text=str(i), command=lambda num=i: update_input(num))
+    button.grid(row=(i-1)//3, column=(i-1)%3)
+
+# Add button for number 0
+button_0 = tk.Button(keypad_frame, text="0", command=lambda: update_input(0))
+button_0.grid(row=3, column=1)
+
 # Bind the Enter key to the shutdown action
 entry.bind("<Return>", shutdown_after_duration)
+
+# Function to delete the last number entered
+def delete_last():
+    current_value = entry.get()
+    entry.delete(len(current_value) - 1, 'end')
+
+# Create and pack the delete button
+delete_button = tk.Button(root, text="Delete", command=delete_last)
+delete_button.pack()
+
+# Function to clear the input field
+def clear_input():
+    entry.delete(0, 'end')
+
+# Create and pack the clear button
+clear_button = tk.Button(root, text="Clear", command=clear_input)
+clear_button.pack()
 
 # Create and pack the button to trigger the shutdown
 shutdown_button = tk.Button(root, text="Shutdown", command=shutdown_after_duration)
