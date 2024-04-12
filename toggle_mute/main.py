@@ -54,7 +54,7 @@ update_window_list()  # Initial population of the window list
 refresh_button = tk.Button(selection_window, text="Refresh", command=update_window_list)
 refresh_button.pack()
 
-def on_ok():
+def on_toggle_mute():
     # Retrieve selected window names based on Checkbutton states
     selected_window_names = [name for name, var in window_names_vars.items() if var.get()]
     global selected_windows
@@ -65,8 +65,14 @@ def on_ok():
     for var in window_names_vars.values():
         var.set(False)
 
-ok_button = tk.Button(selection_window, text="OK", command=on_ok)
-ok_button.pack()
+toggle_mute_button = tk.Button(selection_window, text="Toggle Mute", command=on_toggle_mute)
+toggle_mute_button.pack()
+
+def exit_application():
+    root.destroy()
+
+exit_button = tk.Button(selection_window, text="Exit", command=exit_application)
+exit_button.pack()
 
 # Run the main loop
 root.mainloop()
