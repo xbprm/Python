@@ -29,7 +29,7 @@ def shutdown_after_duration(event=None):
             duration_sec = duration * pow(60 , current_unit_index) # Convert minutes to seconds
             print(f"Shutting down after {duration_sec} seconds...")
             print(f"Shutting down after {duration} {time_units[current_unit_index]}...")
-            # os.system(f"shutdown /s /t {duration_sec}")  # Schedule a system shutdown
+            os.system(f"shutdown /s /t {duration_sec}")  # Schedule a system shutdown
             root.destroy()  # Terminate the GUI application
     except ValueError:
         result_label.config(text="Invalid input. Please enter a valid number.")  # Display error message for invalid input
