@@ -3,6 +3,11 @@ import os
 
 import tkinter.messagebox as messagebox
 
+# Define the time units
+time_units = ["seconds", "minutes", "hours"]
+current_unit_index = 1  # Initialize the index to point to the current time unit
+
+
 def shutdown_after_duration(event=None):
     """
     Initiates a system shutdown after a specified duration, displaying a confirmation dialog.
@@ -19,11 +24,12 @@ def shutdown_after_duration(event=None):
     """
     try:
         duration = int(entry.get())  # Retrieve the duration in minutes from the input field
-        confirmation = messagebox.askokcancel("Confirmation", f"Shutdown the system after {duration} minutes?")
+        confirmation = messagebox.askokcancel("Confirmation", f"Shutdown the system after {duration} {time_units[current_unit_index]}?")
         if confirmation:
-            duration_sec = duration * 60  # Convert minutes to seconds
-            print(f"Shutting down after {duration} minutes...")
-            os.system(f"shutdown /s /t {duration_sec}")  # Schedule a system shutdown
+            duration_sec = duration * pow(60 , current_unit_index) # Convert minutes to seconds
+            print(f"Shutting down after {duration_sec} seconds...")
+            print(f"Shutting down after {duration} {time_units[current_unit_index]}...")
+            # os.system(f"shutdown /s /t {duration_sec}")  # Schedule a system shutdown
             root.destroy()  # Terminate the GUI application
     except ValueError:
         result_label.config(text="Invalid input. Please enter a valid number.")  # Display error message for invalid input
@@ -48,7 +54,7 @@ root = tk.Tk()
 root.title("Shutdown After Duration")
 
 # Create and pack the input label and entry
-input_label = tk.Label(root, text="Enter the duration in minutes:")
+input_label = tk.Label(root, text=f"Enter the duration in {time_units[current_unit_index]}:")
 input_label.pack()
 entry = tk.Entry(root)
 entry.pack()
@@ -92,6 +98,20 @@ def clear_input():
 # Create and pack the clear button
 clear_button = tk.Button(root, text="Clear", command=clear_input)
 clear_button.pack()
+
+# Function to switch between hours, minutes, and seconds
+def switch_time_unit():
+    global current_unit_index  # Access the global variable to track the current time unit index
+    current_unit_index = (current_unit_index + 1) % len(time_units)  # Cycle through the time units
+    selected_unit = time_units[current_unit_index]  # Get the currently selected time unit
+    input_label.config(text=f"Enter the duration in {selected_unit}:")  # Update the input label
+    # Update the input field placeholder based on the selected time unit
+    entry.delete(0, 'end')  # Clear the input field
+    # entry.insert(0, f"Enter the duration in {selected_unit}")  # Set the input field placeholder
+
+# Create and pack the button to switch between hours, minutes, and seconds
+switch_button = tk.Button(root, text="Switch Time Unit", command=switch_time_unit)
+switch_button.pack()
 
 # Create and pack the button to trigger the shutdown
 shutdown_button = tk.Button(root, text="Shutdown", command=shutdown_after_duration)
