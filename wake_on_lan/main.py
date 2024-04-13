@@ -20,5 +20,5 @@ def send_magic_packet(mac_address):
         sock.sendto(magic_packet, ('<broadcast>', 9))
 
 # Example usage
-mac_AMD_Ryzen_2600X = "30:9C:23:89:EC:8B"
-send_magic_packet(mac_AMD_Ryzen_2600X)
+mac_AMD_Ryzen_2600X = "30-9C-23-89-EC-8B"
+send_magic_packet(mac_AMD_Ryzen_2600X.replace("-", ":"))
