@@ -1,6 +1,6 @@
 from tkinter import Tk, Label, Button, Listbox
 from comtypes import CLSCTX_ALL
-from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
+from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume, AudioDeviceState
 
 class AudioDeviceSelector:
     def __init__(self, master):
@@ -22,9 +22,20 @@ class AudioDeviceSelector:
         # This method correctly fetches and lists active audio devices
         self.audio_devices = AudioUtilities.GetAllDevices()
 
+        max_length = 0  # Variable to store the maximum length of device names
+
         for device in self.audio_devices:
-            if device.state == 1:  # DEVICE_STATE_ACTIVE
-                self.listbox.insert("end", device.FriendlyName)
+            print(f"Device: {device.FriendlyName}")
+            print(f"  State: {device.state}")
+            if device.state == AudioDeviceState.Active:  # DEVICE_STATE_ACTIVE
+                device_name = device.FriendlyName
+                self.listbox.insert("end", device_name)
+                # Update max_length if the current device's name is longer
+                if len(device_name) > max_length:
+                    max_length = len(device_name)
+
+        # Adjust the width of the listbox to fit the longest device name
+        self.listbox.config(width=max_length)
 
     def select_device(self):
         selection_index = self.listbox.curselection()
