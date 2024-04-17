@@ -62,9 +62,21 @@ entry.focus_set()  # Set focus to the input field
 
 # Function to update the input field with the clicked number
 def update_input(number):
-    current_value = entry.get()
-    entry.delete(0, 'end')
-    entry.insert(0, current_value + str(number))
+    """
+    Updates the input field with the number clicked on the keypad.
+
+    This function retrieves the current value from the input field, appends the clicked number to it,
+    and then updates the input field with this new value.
+
+    Parameters:
+    number (int): The number clicked on the keypad.
+
+    Returns:
+    None
+    """
+    current_value = entry.get()  # Get the current value from the input field
+    entry.delete(0, 'end')  # Clear the input field
+    entry.insert(0, current_value + str(number))  # Append the clicked number and update the input field
 
 # Create and pack the numerical keypad
 keypad_frame = tk.Frame(root)
@@ -84,8 +96,20 @@ entry.bind("<Return>", shutdown_after_duration)
 
 # Function to delete the last number entered
 def delete_last():
-    current_value = entry.get()
-    entry.delete(len(current_value) - 1, 'end')
+    """
+    Deletes the last character entered in the input field.
+
+    This function retrieves the current value from the input field, calculates the length of this string,
+    and then deletes the last character by adjusting the end index of the string in the input field.
+
+    Parameters:
+    None
+
+    Returns:
+    None
+    """
+    current_value = entry.get()  # Get the current value from the input field
+    entry.delete(len(current_value) - 1, 'end')  # Delete the last character
 
 # Create and pack the delete button
 delete_button = tk.Button(root, text="Delete", command=delete_last)
@@ -93,7 +117,18 @@ delete_button.pack()
 
 # Function to clear the input field
 def clear_input():
-    entry.delete(0, 'end')
+    """
+    Clears the input field in the GUI.
+
+    This function deletes all the current content from the entry widget, effectively resetting it to an empty state.
+
+    Parameters:
+    None
+
+    Returns:
+    None
+    """
+    entry.delete(0, 'end')  # Delete all content from the beginning (0) to the end of the entry widget
 
 # Create and pack the clear button
 clear_button = tk.Button(root, text="Clear", command=clear_input)
@@ -101,12 +136,25 @@ clear_button.pack()
 
 # Function to switch between hours, minutes, and seconds
 def switch_time_unit():
+    """
+    Switches the current time unit among seconds, minutes, and hours in a cyclic manner.
+
+    This function updates the global variable `current_unit_index` to cycle through the indices
+    corresponding to the time units defined in the `time_units` list. It then updates the input label
+    to reflect the newly selected time unit and clears the input field to prompt the user for a new value
+    in the context of the selected time unit.
+
+    Parameters:
+    None
+
+    Returns:
+    None
+    """
     global current_unit_index  # Access the global variable to track the current time unit index
     current_unit_index = (current_unit_index + 1) % len(time_units)  # Cycle through the time units
     selected_unit = time_units[current_unit_index]  # Get the currently selected time unit
     input_label.config(text=f"Enter the duration in {selected_unit}:")  # Update the input label
-    # Update the input field placeholder based on the selected time unit
-    entry.delete(0, 'end')  # Clear the input field
+    entry.delete(0, 'end')  # Clear the input field to prompt for new input  # Clear the input field
     # entry.insert(0, f"Enter the duration in {selected_unit}")  # Set the input field placeholder
 
 # Create and pack the button to switch between hours, minutes, and seconds
