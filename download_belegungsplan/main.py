@@ -47,7 +47,7 @@ def prepend_new_log_to_main(new_log_path, main_log_path="script_log.log"):
         with open(main_log_path, 'r+') as main_log_file:
             main_log_contents = main_log_file.read()
             main_log_file.seek(0, 0)
-            main_log_file.write(new_log_contents + '\n' + main_log_contents)
+            main_log_file.write(new_log_contents + main_log_contents)
     except Exception as e:
         logging.error(f"Failed to prepend new log to main log: {e}")
 
