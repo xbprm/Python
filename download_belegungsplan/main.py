@@ -3,7 +3,9 @@ import os
 import datetime
 import logging
 
-script_folder = os.path.dirname(os.path.abspath(__file__))
+# Change the script_folder to the new specified path
+script_folder = "\\\\libreelec\\Exchange02\\MyBackup\\Belegungsplan"
+# script_folder = os.path.dirname(os.path.abspath(__file__))
 timestamp = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
 log_filename = f"script_log_{timestamp}.log"
 
@@ -56,29 +58,34 @@ def download_pdf(pdf_url, pdf_path):
     """
     Download a PDF file from a specified URL and save it to a given local path.
 
-    This function attempts to download a PDF file from the provided URL. If the download is successful,
-    the content is saved to the specified local file path. If any error occurs during the download or saving process,
-    an error is logged, and the exception is raised to the caller.
+    This function attempts to download a PDF file from the provided URL up to 5 times if necessary.
+    If the download is successful, the content is saved to the specified local file path.
+    If any error occurs during the download or saving process, an error is logged.
 
     Parameters:
     - pdf_url (str): The URL from which the PDF file should be downloaded.
     - pdf_path (str): The local file path where the downloaded PDF should be saved.
 
     Raises:
-    - requests.exceptions.RequestException: If an error occurs during the download process.
+    - requests.exceptions.RequestException: If an error occurs during the download process after 5 attempts.
 
     Returns:
     - None
     """
-    try:
-        response = requests.get(pdf_url)
-        response.raise_for_status()  # Raises an HTTPError for bad responses
-        with open(pdf_path, 'wb') as file:
-            file.write(response.content)
-        logging.info(f"PDF downloaded successfully: {pdf_path}")
-    except requests.exceptions.RequestException as e:
-        logging.error(f"Failed to download PDF: {e}")
-        raise
+    attempt = 0
+    while attempt < 5:
+        try:
+            response = requests.get(pdf_url)
+            response.raise_for_status()  # Raises an HTTPError for bad responses
+            with open(pdf_path, 'wb') as file:
+                file.write(response.content)
+            logging.info(f"PDF downloaded successfully: {pdf_path}")
+            break  # Exit the loop if download is successful
+        except requests.exceptions.RequestException as e:
+            logging.error(f"Attempt {attempt + 1}: Failed to download PDF: {e}")
+            attempt += 1
+            if attempt == 5:
+                raise  # Raise the last exception if all attempts fail
 
 def compare_files(file1, file2):
     """
