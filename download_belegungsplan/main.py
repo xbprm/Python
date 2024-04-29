@@ -3,8 +3,19 @@ import os
 import datetime
 import logging
 
-# Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+script_folder = os.path.dirname(os.path.abspath(__file__))
+
+# Configure logging to file
+logging.basicConfig(filename=os.path.join(script_folder, "script_log.log"), filemode='a', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+# Create console handler and set level to info
+console_handler = logging.StreamHandler()
+console_handler.setLevel(logging.INFO)
+formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+console_handler.setFormatter(formatter)
+
+# Add the handler to the root logger
+logging.getLogger('').addHandler(console_handler)
 
 def download_pdf(pdf_url, pdf_path):
     """Download PDF from a given URL and save it to a specified path."""
@@ -38,7 +49,6 @@ def backup_and_rename(original_path, new_path, backup_path):
         raise
 
 def main():
-    script_folder = os.path.dirname(os.path.abspath(__file__))
     current_year, current_week, _ = datetime.date.today().isocalendar()
     pdf_url = "http://www.platzbelegung.tennis65-eschborn.de/Platzbelegung-Woche.pdf"
     pdf_filename = f'downloaded_file_{current_year}_week_{current_week:02}.pdf'
