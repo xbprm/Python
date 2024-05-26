@@ -4,7 +4,7 @@ import datetime
 import logging
 
 # Change the script_folder to the new specified path
-script_folder = "\\\\libreelec\\Exchange02\\MyBackup\\Belegungsplan"
+script_folder = r"C:\Users\boerg\iCloudDrive\Doc\Tennis\tennis65eschborn\Belegungsplan"
 # script_folder = os.path.dirname(os.path.abspath(__file__))
 timestamp = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
 log_filename = f"script_log_{timestamp}.log"
