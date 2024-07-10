@@ -47,7 +47,7 @@ def print_net_io_stats(last_stats, x_values, y_values):
     plt.pause(0.001)
 
     # Update the last network IO statistics
-    last_stats = current_stats
+    return current_stats
 
 # Define the main function
 if __name__ == '__main__':
@@ -61,7 +61,8 @@ if __name__ == '__main__':
     # Start an infinite loop
     while True:
         # Use the print_net_io_stats function to print the new network IO statistics
-        print_net_io_stats(last_stats, x_values, y_values)
+        current_stats = print_net_io_stats(last_stats, x_values, y_values)
+        last_stats = current_stats
 
         # Sleep for 1 second
         time.sleep(1)
