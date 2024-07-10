@@ -1,9 +1,6 @@
 import psutil  # Import the psutil library
 import time  # Import the time library
-<<<<<<< Current
-=======
 import matplotlib.pyplot as plt  # Import the matplotlib library
->>>>>>> Suggested by Tabnine
 
 # Define a function to get the network IO statistics
 def get_net_io_stats():
@@ -11,11 +8,7 @@ def get_net_io_stats():
     return psutil.net_io_counters()
 
 # Define a function to print the network IO statistics
-<<<<<<< Current
-def print_net_io_stats(last_stats):
-=======
 def print_net_io_stats(last_stats, x_values, y_values):
->>>>>>> Suggested by Tabnine
     # Use the get_net_io_stats function to get the current network IO statistics
     current_stats = get_net_io_stats()
 
@@ -32,8 +25,6 @@ def print_net_io_stats(last_stats, x_values, y_values):
     # Print the new network IO statistics
     print(f"Received: {mb_new_received:.2f} MB/s, Sent: {mb_new_sent:.2f} MB/s, Total: {mb_new_total:.2f} MB/s")
 
-<<<<<<< Current
-=======
     # Update the data for the plot
     x_values.append(len(x_values))
     y_values.append(mb_new_total)
@@ -55,7 +46,6 @@ def print_net_io_stats(last_stats, x_values, y_values):
     # Draw the plot
     plt.pause(0.001)
 
->>>>>>> Suggested by Tabnine
     # Update the last network IO statistics
     last_stats = current_stats
 
@@ -64,21 +54,14 @@ if __name__ == '__main__':
     # Get the initial network IO statistics
     last_stats = get_net_io_stats()
 
-<<<<<<< Current
-=======
     # Initialize the data for the plot
     x_values = []
     y_values = []
 
->>>>>>> Suggested by Tabnine
     # Start an infinite loop
     while True:
         # Use the print_net_io_stats function to print the new network IO statistics
-<<<<<<< Current
-        print_net_io_stats(last_stats)
-=======
         print_net_io_stats(last_stats, x_values, y_values)
->>>>>>> Suggested by Tabnine
 
         # Sleep for 1 second
         time.sleep(1)
