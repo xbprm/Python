@@ -1,8 +1,6 @@
 import tkinter as tk
 import tkinter.simpledialog
-from comtypes import CLSCTX_ALL
-import pycaw.pycaw as pycaw
-from ctypes import cast, POINTER
+from pycaw.pycaw import AudioUtilities, ISimpleAudioVolume
 
 def toggle_specific_window_mute(window_names):
     """
@@ -18,19 +16,18 @@ def toggle_specific_window_mute(window_names):
     Returns:
     - None
     """
-    sessions = pycaw.AudioUtilities.GetAllSessions()
+    sessions = AudioUtilities.GetAllSessions()
 
     for window_name in window_names:  # Iterate over each window name in the list
         for session in sessions:
             if session.Process and session.Process.name() == window_name:
-                simple_volume = session._ctl.QueryInterface(pycaw.ISimpleAudioVolume)
+                simple_volume = session._ctl.QueryInterface(ISimpleAudioVolume)
                 current_mute_state = simple_volume.GetMute()
                 print("Toggling Mute State...")
                 print("Session: " + session.Process.name())
                 print("PID: " + str(session.Process.pid))
                 print("Current Mute State: " + str(current_mute_state))
                 simple_volume.SetMute(not current_mute_state, None)  # Toggle the mute state
-  # Toggle the mute state
 
 root = tk.Tk()
 root.withdraw()  # Hide the root window
@@ -66,7 +63,7 @@ def update_window_list():
         widget.destroy()
 
     # Retrieve the latest list of open window names, removing duplicates
-    window_names = [session.Process.name() for session in pycaw.AudioUtilities.GetAllSessions() if session.Process]
+    window_names = [session.Process.name() for session in AudioUtilities.GetAllSessions() if session.Process]
     window_names = list(dict.fromkeys(window_names))  # Remove duplicates
 
     # Create a Checkbutton for each window name and add it to the GUI
