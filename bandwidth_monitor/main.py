@@ -1,6 +1,9 @@
 import psutil  # Import the psutil library
 import time  # Import the time library
 import matplotlib.pyplot as plt  # Import the matplotlib library
+import socket
+
+UPDATE_FREQUENCY = 0.001  # Update frequency in seconds
 
 # Define a function to get the network IO statistics
 def get_net_io_stats():
@@ -44,13 +47,20 @@ def print_net_io_stats(last_stats, x_values, y_values):
     plt.legend()
 
     # Draw the plot
-    plt.pause(0.001)
+    plt.pause(UPDATE_FREQUENCY)
 
     # Update the last network IO statistics
     return current_stats
 
 # Define the main function
 if __name__ == '__main__':
+
+    # Get the hostname
+    hostname = socket.gethostname()
+
+    if hostname == "FRLCHBWW":
+        UPDATE_FREQUENCY = 1 # Update frequency in seconds
+
     # Get the initial network IO statistics
     last_stats = get_net_io_stats()
 
