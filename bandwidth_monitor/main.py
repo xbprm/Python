@@ -3,6 +3,7 @@ import time  # Import the time library
 import matplotlib.pyplot as plt  # Import the matplotlib library
 import socket
 
+SHOW_PLOT = False
 UPDATE_FREQUENCY = 0.001  # Update frequency in seconds
 
 # Define a function to get the network IO statistics
@@ -28,26 +29,27 @@ def print_net_io_stats(last_stats, x_values, y_values):
     # Print the new network IO statistics
     print(f"Received: {mb_new_received:.2f} MB/s, Sent: {mb_new_sent:.2f} MB/s, Total: {mb_new_total:.2f} MB/s")
 
-    # Update the data for the plot
-    x_values.append(len(x_values))
-    y_values.append(mb_new_total)
+    if SHOW_PLOT:
+        # Update the data for the plot
+        x_values.append(len(x_values))
+        y_values.append(mb_new_total)
 
-    # Clear the plot
-    plt.clf()
+        # Clear the plot
+        plt.clf()
 
-    # Plot the data
-    plt.plot(x_values, y_values, label="Total MB/s")
+        # Plot the data
+        plt.plot(x_values, y_values, label="Total MB/s")
 
-    # Set the plot title and labels
-    plt.title("Network IO Statistics")
-    plt.xlabel("Time (seconds)")
-    plt.ylabel("MB/s")
+        # Set the plot title and labels
+        plt.title("Network IO Statistics")
+        plt.xlabel("Time (seconds)")
+        plt.ylabel("MB/s")
 
-    # Add a legend
-    plt.legend()
+        # Add a legend
+        plt.legend()
 
-    # Draw the plot
-    plt.pause(UPDATE_FREQUENCY)
+        # Draw the plot
+        plt.pause(UPDATE_FREQUENCY)
 
     # Update the last network IO statistics
     return current_stats
