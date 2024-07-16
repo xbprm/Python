@@ -2,6 +2,8 @@ import psutil  # Import the psutil library
 import time  # Import the time library
 import matplotlib.pyplot as plt  # Import the matplotlib library
 import socket
+import tkinter as tk  # Import the Tkinter library
+from tkinter import messagebox  # Import the messagebox module from Tkinter
 
 SHOW_PLOT = False
 UPDATE_FREQUENCY = 0.001  # Update frequency in seconds
@@ -57,11 +59,19 @@ def print_net_io_stats(last_stats, x_values, y_values):
 # Define the main function
 if __name__ == '__main__':
 
+    # Create a Tkinter window
+    root = tk.Tk()
+    root.withdraw()  # Hide the Tkinter window
+
+    # Ask the user if the plot should be shown
+    show_plot_choice = messagebox.askyesno("Plot Visibility", "Do you want to show the plot?")
+    SHOW_PLOT = show_plot_choice
+
     # Get the hostname
     hostname = socket.gethostname()
 
     if hostname == "FRLCHBWW":
-        UPDATE_FREQUENCY = 1 # Update frequency in seconds
+        UPDATE_FREQUENCY = 1  # Update frequency in seconds
 
     # Get the initial network IO statistics
     last_stats = get_net_io_stats()
