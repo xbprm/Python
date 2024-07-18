@@ -1,6 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
 import re
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+import time
 
 # Set to store unique links
 visited_links = set()
@@ -25,11 +28,17 @@ def parse_website(url, output_file, url_prefix="", depth=0, max_depth=4):
 
     try:
         print(f"Parsing {url}")
-        response = requests.get(url, verify=False)
-        print(f"Status code: {response.status_code}")
-        response.raise_for_status()  # Raise an exception for 4xx or 5xx status codes
+
+        # Set up Selenium with ChromeDriver
+        chrome_options = Options()
+        chrome_options.add_argument("--headless")  # Run Chrome in headless mode
+        driver = webdriver.Chrome(options=chrome_options)
+
+        driver.get(url)
+        time.sleep(5)  # Wait for the page to load completely
+
         print("Parsing complete")
-        soup = BeautifulSoup(response.content, 'html.parser')
+        soup = BeautifulSoup(driver.page_source, 'html.parser')
         print(soup.prettify()[:1000] + "...\n")
 
         # Find all anchor tags
@@ -38,6 +47,7 @@ def parse_website(url, output_file, url_prefix="", depth=0, max_depth=4):
 
         for tag in anchor_tags:
             href = tag.get('href')
+            print(f"Found href: {href}")
 
             # Check if the href attribute starts with "https"
             if href and href.startswith(url_prefix):
@@ -54,7 +64,9 @@ def parse_website(url, output_file, url_prefix="", depth=0, max_depth=4):
                 with open(output_file, 'a') as f:
                     f.write(f"{href}\n")
 
-    except requests.exceptions.RequestException as e:
+        driver.quit()
+
+    except Exception as e:
         print(f"Error accessing {url}: {e}")
 
 # Usage example
