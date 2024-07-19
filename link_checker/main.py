@@ -32,6 +32,7 @@ def parse_website(url, output_file, url_prefix="", depth=0, max_depth=4):
         # Set up Selenium with ChromeDriver
         chrome_options = Options()
         chrome_options.add_argument("--headless")  # Run Chrome in headless mode
+        chrome_options.add_argument("C:/Util/chromedriver-win64")
         driver = webdriver.Chrome(options=chrome_options)
 
         driver.get(url)
