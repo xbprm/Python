@@ -1,3 +1,4 @@
+import os
 from selenium import webdriver
 
 # Set the path to the ChromeDriver executable
@@ -21,8 +22,17 @@ driver.get(url)
 # Wait for the page to load completely (optional)
 driver.implicitly_wait(10)  # Wait for 10 seconds
 
+# Get the absolute path of the script file
+script_path = os.path.abspath(__file__)
+
+# Get the directory path of the script file
+script_directory = os.path.dirname(script_path)
+
+# Define the path to save the downloaded page
+downloaded_page_path = os.path.join(script_directory, "downloaded_website.html")
+
 # Save the page source to a file
-with open("downloaded_website.html", "w", encoding="utf-8") as file:
+with open(downloaded_page_path, "w", encoding="utf-8") as file:
     file.write(driver.page_source)
 
 # Close the ChromeDriver instance
